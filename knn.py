@@ -5,7 +5,10 @@ from sklearn import neighbors
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
 
-df = pd.read_csv('inputs/data.csv')
+option = 2
+data_csv = 'inputs/data.csv' if option == 1 else 'inputs/data-2.csv'
+
+df = pd.read_csv(data_csv)
 features_np = df.columns.values
 print(features_np)
 features_np = np.delete(features_np, -1)

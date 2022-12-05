@@ -8,7 +8,8 @@ feature = ['CurrentAge', 'Weight', 'Height', 'Gender', 'MonthOfBirth',
            'ExerciseFrequency', 'FirstAlphabetOfName', 'Label']
 
 print(len(feature))
-
+option = 2
+data_csv = 'inputs/data.csv' if option == 1 else 'inputs/data-2.csv'
 # data distribution
 data_count = 5000
 
@@ -42,6 +43,7 @@ for index in range(data_count):
                               string.ascii_uppercase)) - 1)]
     # calculate rules
     """
+    [Option1]
     1. If current age >= 1:
         - Female: weight :point_right: 6 ~ 9
         - Male: weight :point_right: 8 ~ 11
@@ -52,20 +54,36 @@ for index in range(data_count):
     5. Exercise frequency per week: 3~7
     """
     label = 0
-    if current_age >= 1:
-        if gender == 0 and weight >= 6 and weight <= 9:
+    if option == 1:
+        if current_age >= 1:
+            if gender == 0 and weight >= 6 and weight <= 9:
+                label = 1
+            elif gender == 1 and weight >= 8 and weight <= 11:
+                label = 1
+            elif height >= 35 and height <= 41:
+                label = 1
+        elif m_of_birth in [1, 2, 3, 5, 8]:
             label = 1
-        elif gender == 1 and weight >= 8 and weight <= 11:
+        elif feeding_method in [1, 2]:
             label = 1
-        elif height >= 35 and height <= 41:
+        elif exercise_freq >= 3:
             label = 1
-    elif m_of_birth in [1, 2, 3, 5, 8]:
-        label = 1
-    elif feeding_method in [1, 2]:
-        label = 1
-    elif exercise_freq >= 3:
-        label = 1
+    else:
+        # 修改第一個條件 （改為 0.8)
+        if current_age >= 0.8:
+            if gender == 0 and weight >= 6 and weight <= 9:
+                label = 1
+            elif gender == 1 and weight >= 8 and weight <= 11:
+                label = 1
+            elif height >= 35 and height <= 41:
+                label = 1
+        elif m_of_birth in [1, 2, 3, 5, 8]:
+            label = 1
+        elif feeding_method in [1, 2]:
+            label = 1
+        elif exercise_freq >= 3:
+            label = 1
     row.append(label)
     rows.append(row)
 df = pd.DataFrame(rows, columns=feature)
-df.to_csv('inputs/data.csv', index=False)
+df.to_csv(data_csv, index=False)
