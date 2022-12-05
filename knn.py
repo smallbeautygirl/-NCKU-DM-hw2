@@ -20,7 +20,7 @@ print(x)
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
 
 # algorithm{‘auto’, ‘ball_tree’, ‘kd_tree’, ‘brute’}, default=’auto’
-model = neighbors.KNeighborsClassifier(n_neighbors=5, algorithm='brute')
+model = neighbors.KNeighborsClassifier(n_neighbors=5, algorithm='kd_tree')
 model.fit(x_train, y_train)
 
 print(model.score(x_test, y_test))
